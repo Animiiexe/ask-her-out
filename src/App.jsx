@@ -1,13 +1,52 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import Header from './components/Header';
+import Question from './components/Question';
+import Summary from './components/Summary';
+import Footer from './components/Footer';
 
 
 const questions = [
   {
     question: 'Where would you like to go on our date? 🌍',
     bgColor: 'from-purple-500 to-pink-500',
-    gif: 'https://media1.tenor.com/m/rkjohpeNZnAAAAAd/mochi-poke-poke-cute-cat.gif', // Example GIF URL
+    gif: 'https://media1.tenor.com/m/rkjohpeNZnAAAAAd/mochi-poke-poke-cute-cat.gif',
     options: ['Beach 🏖️', 'Restaurant 🍽️', 'Movie 🎬', 'Park 🌳'],
+  },
+  {
+    question: 'What time should I pick you up? 🕒',
+    bgColor: 'from-purple-600 to-blue-600',
+    gif: 'https://media1.tenor.com/m/R74gdS_SrRYAAAAd/quby-quby-sticker.gif',
+    options: ['Morning ☀️', 'Afternoon 🌤️', 'Evening 🌆', 'Night 🌙'],
+  },
+  {
+    question: 'Should I bring flowers or chocolates? 🌹🍫',
+    bgColor: 'from-green-400 to-blue-400',
+    gif: 'https://media1.tenor.com/m/naWX8j8QzYsAAAAC/milk-and-mocha-milk-and-mocha-bear.gif',
+    options: ['Flowers 🌹', 'Chocolates 🍫', 'Both 🥰', 'Surprise me! 😋'],
+  },
+  {
+    question: 'What’s your favorite way to relax? 🛋️',
+    bgColor: 'from-teal-500 to-green-500',
+    gif: 'https://media1.tenor.com/m/5KrBx7BrdgMAAAAC/milk-and-mocha-milk-and-mocha-bear.gif',
+    options: ['Chatting 💬', 'Listening to Music 🎧', 'Watching Movies 🎥', 'Exploring Outdoors 🌿'],
+  },
+  {
+    question: 'What color should I wear on our date? 🎨',
+    bgColor: 'from-pink-500 to-purple-500',
+    gif: 'https://media1.tenor.com/m/v9sZ1F-gmWMAAAAd/milk-and-mocha-milk-and-mocha-bear.gif',
+    options: ['Red ❤️', 'Blue 💙', 'Black 🖤', 'Yellow 💛'],
+  },
+  {
+    question: 'What genre of movie would you like to watch? 🎥',
+    bgColor: 'from-blue-500 to-green-500',
+    gif: 'https://media1.tenor.com/m/s3geBz_c2ogAAAAC/scary.gif',
+    options: ['Action 🦸‍♀️', 'Romantic 💕', 'Comedy 😂', 'Horror 👻'],
+  },
+  {
+    question: 'What kind of music should we listen to? 🎶',
+    bgColor: 'from-orange-400 to-red-400',
+    gif: 'https://media1.tenor.com/m/J8D7WFWX4pIAAAAd/listening-music-musical-notes.gif',
+    options: ['Pop 🎤', 'Jazz 🎷', 'Classical 🎻', 'Rock 🎸'],
   },
   {
     question: 'What would you like to eat? 🍕',
@@ -16,20 +55,39 @@ const questions = [
     options: ['Pizza 🍕', 'Sushi 🍣', 'Burgers 🍔', 'Salad 🥗'],
   },
   {
-    question: 'What genre of movie would you like to watch? 🎥',
-    bgColor: 'from-blue-500 to-green-500',
-    gif: 'https://media1.tenor.com/m/s3geBz_c2ogAAAAC/scary.gif',
-    options: ['Action 🦸‍♀️', 'Romantic 💕', 'Comedy 😂', 'Horror 👻'],
+    question: 'Should we end the day with dessert? 🍰',
+    bgColor: 'from-red-500 to-yellow-500',
+    gif: 'https://media1.tenor.com/m/42qgq33RCmkAAAAC/milk-and-mocha-milk-and-mocha-bear.gif',
+    options: ['Ice Cream 🍦', 'Cake 🍰', 'Donuts 🍩', 'All of the above! 😍'],
+  },
+  {
+    question: 'Which dessert should I bake for you? 🍪',
+    bgColor: 'from-pink-400 to-yellow-400',
+    gif: 'https://media1.tenor.com/m/PIGeud5zZBMAAAAd/milk-and-mocha-milk-and-mocha-bear.gif',
+    options: ['Cookies 🍪', 'Brownies 🍫', 'Cupcakes 🧁', 'Cheesecake 🍰'],
+  },
+  {
+    question: 'How should we end the night? 🌌',
+    bgColor: 'from-blue-800 to-purple-800',
+    gif: 'https://media1.tenor.com/m/1gf_Jz8WYH0AAAAC/sami-en-dina-sami-dina.gif',
+    options: ['Stargazing ✨', 'Playing Games 🎮', 'Deep Talks 🗨️', 'Dancing 💃'],
+  },
+  {
+    question: 'What’s the perfect way to say goodbye? 💌',
+    bgColor: 'from-red-400 to-pink-400',
+    gif: 'https://media.tenor.com/zCpmxNoEU7IAAAAj/milk-and-mocha.gif',
+    options: ['A Hug 🤗', 'A Kiss 😘', 'A High-Five ✋', 'A Promise to Meet Again 💕'],
   },
 ];
+
 
 
 function App() {
   const [herName, setHerName] = useState('');
   const [isNameSubmitted, setIsNameSubmitted] = useState(false);
-  const [isAnswered, setIsAnswered] = useState(false);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState([]);
+  const [isAnswered, setIsAnswered] = useState(false);
 
   const handleNameSubmit = (e) => {
     e.preventDefault();
@@ -40,7 +98,6 @@ function App() {
 
   const handleAnswer = (option) => {
     setAnswers((prevAnswers) => [...prevAnswers, option]);
-
     if (currentQuestion < questions.length - 1) {
       setCurrentQuestion(currentQuestion + 1);
     } else {
@@ -49,99 +106,24 @@ function App() {
   };
 
   return (
-    <div>
-    <div className={`min-h-screen flex items-center justify-center text-white transition-all duration-500 bg-gradient-to-br ${
-      isNameSubmitted ? questions[currentQuestion].bgColor : 'from-gray-700 to-gray-900'
-    }`}
-    >
-      {!isNameSubmitted ? (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          className="text-center space-y-6"
-        >
-          <h1 className="text-4xl font-bold">Hello! ❤️</h1>
-          <p className="text-lg">What’s your name?</p>
-          <form onSubmit={handleNameSubmit} className="space-y-4">
-            <input
-              type="text"
-              value={herName}
-              onChange={(e) => setHerName(e.target.value)}
-              placeholder="Enter your name"
-              className="px-4 py-2 mr-4 rounded-lg text-black text-center"
-            />
-            <button
-              type="submit"
-              className="bg-pink-500 text-white px-6 py-2 rounded-lg shadow-lg hover:bg-pink-600 transition "
-            >
-              Let’s Start!
-            </button>
-          </form>
-        </motion.div>
-      ) : !isAnswered ? 
-       (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          className="flex flex-col items-center justify-center space-y-4"
-        >
-          <h1 className="text-4xl font-bold mb-6">Hey {herName}, ❤️</h1>
-          <motion.img
-            src={questions[currentQuestion].gif}
-            alt="GIF"
-            className="w-64 h-64 rounded-lg mb-6"
-            initial={{ scale: 0.8 }}
-            animate={{ scale: 1 }}
-            transition={{ duration: 0.5 }}
+    <div className={`min-h-screen flex flex-col text-white bg-gradient-to-br ${isNameSubmitted ? questions[currentQuestion].bgColor : 'from-gray-700 to-gray-900'}`}>
+      <div className="flex-grow flex items-center justify-center">
+        {!isNameSubmitted ? (
+          <Header herName={herName} setHerName={setHerName} handleNameSubmit={handleNameSubmit} />
+        ) : !isAnswered ? (
+          <Question
+            herName={herName}
+            question={questions[currentQuestion]}
+            handleAnswer={handleAnswer}
           />
-          <motion.p
-            initial={{ scale: 0.8 }}
-            animate={{ scale: 1 }}
-            transition={{ duration: 0.5 }}
-            className="text-xl mb-8 text-center"
-          >
-            {questions[currentQuestion].question}
-          </motion.p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full px-4">
-            {questions[currentQuestion].options.map((option, index) => (
-              <motion.button
-                key={index}
-                onClick={() => handleAnswer(option)}
-                className="bg-white text-pink-500 font-bold py-2 px-6 rounded-full shadow-lg hover:bg-pink-100 hover:scale-105 transition-transform"
-                whileHover={{ scale: 1.1 }}
-              >
-                {option}
-              </motion.button>
-            ))}
-          </div>
-        </motion.div>
-      ) : (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          className="text-center"
-        >
-          <h1 className="text-4xl font-bold mb-6">Yay! 🎉</h1>
-          <p className="text-xl">Here’s what we planned:</p>
-          <div className="mt-4 space-y-4 text-lg">
-            {answers.map((answer, index) => (
-              <p key={index}>
-                {questions[index].question} <strong>{answer}</strong>
-              </p>
-            ))}
-          </div>
-        </motion.div>
-      )}
+        ) : (
+          <Summary questions={questions} answers={answers} />
+        )}
       </div>
-      <div className="flex items-center justify-center bg-black text-white py-4 text-sm">
-        <h1>2024 | Designed and Coded with ❤ by Animesh.</h1>
-      </div>
+      <Footer />
     </div>
   );
 }
 
 export default App;
-
 
